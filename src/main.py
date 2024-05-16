@@ -1,11 +1,25 @@
 import time
+import logging, logging.handlers
 import ctypes
 import subprocess
+import sys
 import cv2
 
+LOG_FILENAME = '..\logs\LockAway_logs.out'
+logger = logging.getLogger(__name__)  
+handler = logging.handlers.RotatingFileHandler(
+              LOG_FILENAME, maxBytes=5, backupCount=0)
+logger.addHandler(handler)
+
 face_classifier = cv2.CascadeClassifier(
-    cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 def main() -> None:
+    if  sys.platform.startswith('win32'):
+        logger.error('Incompatible OS')
+        quit()
+    run()
+
+def run():
     video_capture = cv2.VideoCapture(0)
     start = time.time()
     time_limit = 10
