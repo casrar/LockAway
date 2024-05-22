@@ -25,7 +25,7 @@ def main() -> None:
 def run():
     video_capture = cv2.VideoCapture(0)
     start = time.time()
-    time_limit = int(config['DEFAULT']['LockoutInterval'])
+    time_limit = int(config['CONFIG']['LockoutInterval'])
     while True:
         current_interval = time.time() - start
         print(current_interval)
