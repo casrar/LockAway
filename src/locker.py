@@ -13,7 +13,6 @@ def run(time_limit: int, cascade: str):
     fr = FacialRecognizer(classifier)
     while True:
         current_interval = time.time() - start
-        print(current_interval)
         result, frame = video_capture.read()  # read frames from the video
         if result is False:
             break  # terminate the loop if the frame is not read successfully
@@ -22,7 +21,6 @@ def run(time_limit: int, cascade: str):
         if curr_user_desktop_locked():
             start = time.time()
             current_interval = 0
-            print('Locked')
             continue
 
         # if face is on screen,set interval to 0 start timer again
